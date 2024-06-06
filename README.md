@@ -5,7 +5,7 @@ This project is to restore the hidden face from the masked low-quality facial im
 ## Environment Installation
 
 
-## Datasets
+## Data Preprocessing
 
 
 ## Training
