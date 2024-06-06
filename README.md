@@ -6,6 +6,6 @@ This project is to restore the hidden face from the masked low-quality facial im
 
 
 ## Data Preprocessing
-
+![unmask](https://github.com/SoooJinKim/ai_sys_group02/blob/main/example/KakaoTalk_20240606_103504282.png)  ![masked]()
 
 ## Training
