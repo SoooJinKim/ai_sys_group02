@@ -12,3 +12,11 @@ To create a CCTV-like image, we converted the high-resolution image to low-resol
 The Dlib library was used to detect facial contours, and the OpenCV library was used to mask from the center of the nose to jawline.
 
 ## Training
+
+## Citation
+@unpublished{aisys2,
+title={Masked facial image restoration to distinguish identical person on CCTV using high-resolution transform and GAN},
+author={Kim, Serin and Kim, Sujin and Kim, Johyeon and Song, Taewon},
+year={2024},
+howpublished={https://github.com/SoooJinKim/ai_sys_group02/}
+}
