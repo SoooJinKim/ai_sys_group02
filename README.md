@@ -20,5 +20,5 @@ The Dlib library was used to detect facial contours, and the OpenCV library was 
     author={Kim, Serin and Kim, Sujin and Kim, Johyeon and Song, Taewon},
     year={2024},
     howpublished={https://github.com/SoooJinKim/ai_sys_group02/}
-}
+    }
 
