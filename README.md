@@ -14,9 +14,11 @@ The Dlib library was used to detect facial contours, and the OpenCV library was 
 ## Training
 
 ## Citation
-@unpublished{aisys2,
-title={Masked facial image restoration to distinguish identical person on CCTV using high-resolution transform and GAN},
-author={Kim, Serin and Kim, Sujin and Kim, Johyeon and Song, Taewon},
-year={2024},
-howpublished={https://github.com/SoooJinKim/ai_sys_group02/}
+
+    @unpublished{aisys2,
+    title={Masked facial image restoration to distinguish identical person on CCTV using high-resolution transform and GAN},
+    author={Kim, Serin and Kim, Sujin and Kim, Johyeon and Song, Taewon},
+    year={2024},
+    howpublished={https://github.com/SoooJinKim/ai_sys_group02/}
 }
+
