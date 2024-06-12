@@ -1,0 +1,63 @@
+import torch
+import torchvision.transforms as transforms
+from PIL import Image
+import numpy as np
+from skimage.metrics import structural_similarity as ssim
+from math import log10, sqrt
+import lpips
+
+# SSIM
+def calculate_ssim(img1, img2, win_size=64):
+    img1_np = np.array(img1)
+    img2_np = np.array(img2)
+    return ssim(img1_np, img2_np, multichannel=True, win_size=win_size, channel_axis=2)
+
+# PSNR
+def calculate_psnr(img1, img2):
+    mse = np.mean((np.array(img1) - np.array(img2)) ** 2)
+    if mse == 0:
+        return 100
+    PIXEL_MAX = 255.0
+    return 20 * log10(PIXEL_MAX / sqrt(mse))
+
+# MSE
+def calculate_mse(img1, img2):
+    mse = np.mean((np.array(img1) - np.array(img2)) ** 2)
+    return mse
+
+# LPIPS
+def calculate_lpips(img1, img2, model):
+    img1_tensor = transforms.ToTensor()(img1).unsqueeze(0)
+    img2_tensor = transforms.ToTensor()(img2).unsqueeze(0)
+    return model(img1_tensor, img2_tensor).item()
+
+# Load images
+def load_image(image_path, transform=None):
+    img = Image.open(image_path).convert('RGB')
+    if transform:
+        img = transform(img)
+    return img
+
+transform = transforms.Compose([
+    transforms.Grayscale(num_output_channels=3),  # Convert image to grayscale
+    transforms.Resize((64, 64)),  # Resize all images to 64x64
+    transforms.ToTensor()
+])
+
+# Example usage
+original_image_path = '/Users/kimsoojin/Desktop/img_ex/r_img/real_img_1.png'
+generated_image_path1 = '/Users/kimsoojin/Desktop/img_ex/g_img/generated_img_1.png'
+
+
+original_image = load_image(original_image_path,transform)
+generated_image1 = load_image(generated_image_path1,transform)
+
+# LPIPS model
+lpips_model = lpips.LPIPS(net='alex').to('cuda' if torch.cuda.is_available() else 'cpu')
+
+
+psnr_value1 = calculate_psnr(original_image, generated_image1)
+mse_value1 = calculate_mse(original_image, generated_image1)
+
+
+print(f'Generated Image 1 - PSNR: {psnr_value1}, MSE: {mse_value1}')
