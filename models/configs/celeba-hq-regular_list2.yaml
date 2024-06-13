@@ -1,0 +1,97 @@
+datasets:
+  train:
+    n_iter: 50000
+    batch_size: 8
+    use_shuffle: True
+    n_workers: 1
+    fineSize: 500 #256
+    img_shape: [3, 500, 500]  # [channel, height, width]
+    overlay_list: 'C:\Users\Serin Kim\workspace\AISYS\DMFN-master\datasets\aisys\train_overlay_list.txt' #overlay
+    original_list: 'C:\Users\Serin Kim\workspace\AISYS\DMFN-master\datasets\aisys\train_original_list.txt' #original
+    mask_type: 'landmark'  # specify that the mask is generated using landmarks
+    mask_pos: 'random'
+    mask_height: 250 #128
+    mask_width: 250 #128
+    vertical_margin: 0
+    horizontal_margin: 0
+    max_delta_height: 32
+    max_delta_width: 32
+  val:
+    name: 'celeba_hq'
+    batch_size: 1
+    use_shuffle: True
+    n_workers: 1
+    fineSize: 500
+    img_shape: [3, 500, 500]  # [channel, height, width]
+    overlay_list: 'C:\Users\Serin Kim\workspace\AISYS\DMFN-master\datasets\aisys\val_overlay_list.txt'
+    original_list: 'C:\Users\Serin Kim\workspace\AISYS\DMFN-master\datasets\aisys\val_original_list.txt'
+    mask_type: 'irregular'
+    mask_pos: 'random'
+    mask_height: 250
+    mask_width: 250
+    vertical_margin: 0
+    horizontal_margin: 0
+    max_delta_height: 0
+    max_delta_width: 0
+  test:
+    name: 'celeba_hq'
+    batch_size: 1
+    use_shuffle: False
+    n_workers: 1
+    fineSize: 500
+    img_shape: [3, 500, 500]
+    overlay_list: 'C:\Users\Serin Kim\workspace\AISYS\DMFN-master\datasets\aisys\test_overlay_list.txt'
+    original_list: 'C:\Users\Serin Kim\workspace\AISYS\DMFN-master\datasets\aisys\test_original_list.txt'
+    mask_type: 'irregular' #irregular
+    mask_pos: 'random'
+    mask_height: 128
+    mask_width: 128
+    vertical_margin: 0
+    horizontal_margin: 0
+    max_delta_height: 0
+    max_delta_width: 0
+
+
+fineSize: 500
+img_shape: [3, 500, 500]  # [channel, height, width]
+
+
+is_train: True
+gpu_ids: []
+pretrained_model_G: 'outputs/celeba-hq/checkpoints/58000_G.pth'
+pretrained_model_D: ''
+val_iter: 50 # 200 iter마다 val
+log_iter: 50 # 50마다 log 기록
+save_image_iter: 50
+save_model_iter: 2000
+display_num: 8 # val에 쓸 데이터 수
+
+network_G:
+  which_model_G: 'DMFN'
+  in_nc: 4
+  out_nc: 3
+  nf: 64
+  n_res: 8
+
+network_D:
+  which_model_D: 'discriminator'
+  in_nc: 3
+  nf: 64
+
+
+# train options
+train:
+  pixel_weight: 1
+  pixel_criterion: 'l1'  # [l1 | ml1]
+  feature_weight: 25
+  feature_criterion: 'l1'
+  center_weight: 1
+  dis_feature_weight: 5
+  dis_feature_criterion: 'l1'
+  gan_weight: 0.003
+  gan_type: 'vanilla'  # vanilla | lsgan
+  lr_G: 0.0002
+  lr_D: 0.0002
+  lr_policy: 'MultiStepLR'
+  lr_steps: [100000]
+  lr_gamma: 0.5
